@@ -1,0 +1,116 @@
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+.upload-icon-pulse {
+    animation: pulse 2s infinite;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+/* ─── Toast Notifications ──────────────────────────── */
+.toast-notification {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    z-index: 9999;
+    max-width: 400px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast-notification.toast-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-success {
+    background-color: #10b981;
+    color: white;
+}
+
+.toast-error {
+    background-color: #ef4444;
+    color: white;
+}
+
+.toast-info {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* ─── Drag items ───────────────────────────────────── */
+.pdf-item.dragging {
+    opacity: 0.4;
+    transform: scale(0.95);
+}
+
+.pdf-item.drag-over {
+    border-color: var(--primary);
+    background-color: var(--primary-light);
+    transform: scale(1.03);
+}
+
+/* ─── Add more button ──────────────────────────────── */
+.add-more-btn {
+    border: 2px dashed var(--border-color);
+    background: transparent;
+    cursor: pointer;
+    color: var(--text-muted);
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.add-more-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: var(--primary-light);
+}
+
+/* ─── PDF item size label ──────────────────────────── */
+.pdf-size {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+/* ─── Active nav link ──────────────────────────────── */
+.nav-links a.active {
+    color: var(--primary);
+    font-weight: 600;
+}
