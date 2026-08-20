@@ -1,0 +1,109 @@
+name: pdf-editor-backend
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pdf-editor-backend:latest
+    container_name: pdf_editor_web
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4
+    restart: unless-stopped
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/media
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - backend_net
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pdf-editor-celery:latest
+    container_name: pdf_editor_celery
+    command: celery -A config worker -l info
+    restart: unless-stopped
+    volumes:
+      - media_volume:/app/media
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      web:
+        condition: service_started
+    networks:
+      - backend_net
+
+  db:
+    image: postgres:15-alpine
+    container_name: pdf_editor_db
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-ilovepdf_db}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-ilovepdf_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - backend_net
+
+  redis:
+    image: redis:7-alpine
+    container_name: pdf_editor_redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - backend_net
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: pdf-editor-nginx:latest
+    container_name: pdf_editor_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      web:
+        condition: service_started
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/media
+    networks:
+      - backend_net
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+
+networks:
+  backend_net:
+    driver: bridge
