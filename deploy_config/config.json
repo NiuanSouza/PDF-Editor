@@ -1,0 +1,10 @@
+{
+  "orderId": 1,
+  "liveUrl": "https://pdf-editor-frontend.onrender.com",
+  "description": "Ferramenta web gratuita para juntar PDFs com Drag & Drop. Interface em Vanilla HTML/CSS/JS com Dark Mode nativo e barra de progresso real. Back-End em Django 5 com API REST que realiza o merge em memória via pikepdf e registra logs de auditoria.",
+  "imagesCount": 3,
+  "technologies": {
+    "frontend": ["HTML5", "CSS3", "Vanilla JS"],
+    "backend": ["Python", "Django 5", "pikepdf", "Gunicorn", "SQLite"]
+  }
+}
