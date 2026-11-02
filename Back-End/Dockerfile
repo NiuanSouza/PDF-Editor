@@ -2,9 +2,13 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Dependências do sistema necessárias para pikepdf
+# Dependências do sistema necessárias para pikepdf e conversão Word/PDF
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libqpdf-dev \
+    libreoffice-writer-nogui \
+    default-jre-headless \
+    fonts-dejavu-core \
+    fonts-liberation \
     && rm -rf /var/lib/apt/lists/*
 
 # Instalar dependências Python

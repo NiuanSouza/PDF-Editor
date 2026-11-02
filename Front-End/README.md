@@ -1,48 +1,35 @@
 # Front-End
 
-> Interface de usuário para manipulação de PDFs — Drag & Drop, reordenação, Dark Mode e progresso real de upload, tudo em Vanilla HTML/CSS/JS.
+> Interface de usuário moderna para manipulação e conversão de PDFs — Drag & Drop, reordenação de páginas, Dark Mode nativo e progresso real de upload, tudo em Vanilla HTML5/CSS3/JS.
 
 ## 🎨 Layout e Telas
 
-O Front-End é composto por duas telas principais:
+O Front-End é composto por páginas dedicadas para cada utilitário com identidade visual unificada e favicon profissional:
 
-**1. Home (`index.html`)** — Landing page com a grade de ferramentas disponíveis.
-
-**2. Juntar PDF (`merge.html`)** — Tela principal de uso:
-- **Área de Drag & Drop**: Zona pontilhada onde o usuário arrasta os PDFs ou clica para selecionar
-- **Grid de arquivos**: Cada PDF aparece como um card com nome, tamanho e botão de remoção. Os cards são arrastáveis para reordenação
-- **Sidebar de ações**: Botão "Juntar PDF" que dispara o upload real para o Back-End com barra de progresso
-- **Toast notifications**: Feedback visual de sucesso ou erro após o processamento
-
-**Fluxo de uso**:
-```
-Arrastar PDFs → Reordenar → Clicar "Juntar PDF" → Barra de progresso → Download automático
-```
+1. **Home (`index.html`)** — Grade completa com as 11 ferramentas organizadas por categorias (*Organizar*, *Converter*, *Otimizar*, *Segurança*).
+2. **Juntar PDF (`merge.html`)**
+3. **Dividir PDF (`split.html`)**
+4. **Comprimir PDF (`compress.html`)**
+5. **Word para PDF (`word-to-pdf.html`)**
+6. **PDF para Word (`pdf-to-word.html`)**
+7. **PDF para Imagens (`pdf-to-img.html`)**
+8. **Imagens para PDF (`img-to-pdf.html`)**
+9. **Proteger PDF (`protect.html`)**
+10. **Desbloquear PDF (`unlock.html`)**
+11. **Rotacionar PDF (`rotate.html`)**
+12. **Marca d'Água (`watermark.html`)**
 
 ## 🛠 Tecnologias e Bibliotecas
 
 - **HTML5** — estrutura semântica com elementos nativos
-- **CSS3 / ITCSS** — organização modular (base, layout, components, animations). Dark Mode via variáveis CSS e `data-theme`
-- **Vanilla JS (ES Modules)** — sem frameworks ou bundlers. Usa `import/export` nativo do navegador
-- **XMLHttpRequest** — chamada à API com progresso real de upload via `xhr.upload.onprogress`
+- **CSS3 / ITCSS** — organização modular (base, layout, components, animations, tool). Dark Mode via variáveis CSS e `data-theme`
+- **Vanilla JS (ES Modules)** — sem dependência de frameworks. Utiliza controladores modulares (`toolWorkspace.js` e `api.js`)
+- **Favicon Vetorial** — formato `.svg` de alta resolução com fallback `.ico` e touch icon
 
 ## 🚀 Como Rodar o Front-End
-
-### Execução local
 
 ```bash
 cd Front-End
 python3 -m http.server 3000
-# Acesse: http://localhost:3000/merge.html
-```
-
-> ⚠️ Não abra o `.html` diretamente como arquivo (`file://`). O `type="module"` do JavaScript exige protocolo `http://` — use o Live Server do VS Code ou o comando acima.
-
-### Via Docker
-
-```bash
-cd Front-End
-docker build -t pdf-editor-frontend .
-docker run -p 3000:80 pdf-editor-frontend
-# Acesse: http://localhost:3000
+# Acesse: http://localhost:3000/
 ```

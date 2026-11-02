@@ -6,3 +6,6 @@ reportlab>=4.1
 django-cors-headers>=4.3
 whitenoise>=6.6
 dj-database-url>=2.1
+pdf2docx>=0.5.8
+PyMuPDF>=1.24.0
+

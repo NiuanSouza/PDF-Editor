@@ -1,10 +1,10 @@
 # Back-End
 
-> API REST responsável por receber arquivos PDF do Front-End, realizar o merge com `pikepdf` e retornar o arquivo mesclado para download imediato.
+> API REST responsável por receber arquivos do Front-End, manipular PDFs e realizar conversões com `pikepdf`, `pdf2docx`, `PyMuPDF`, `Pillow`, `ReportLab` e `LibreOffice Headless`.
 
 ## ⚙️ Arquitetura e Modelagem
 
-O servidor segue a arquitetura **Django Apps** — cada domínio de negócio é isolado em seu próprio app:
+O servidor segue a arquitetura **Django Apps** com uma camada dedicada de serviços isolados:
 
 ```
 Back-End/
@@ -15,60 +15,42 @@ Back-End/
  │    └── wsgi.py               # Interface WSGI para o Gunicorn
  ├── apps/
  │    ├── api/
- │    │    ├── views.py         # POST /api/merge/ — lógica de merge com pikepdf
- │    │    └── urls.py          # Rotas da API REST
+ │    │    ├── views.py         # Endpoints REST para todas as operações
+ │    │    ├── urls.py          # Mapeamento de rotas /api/*
+ │    │    └── tests.py         # Testes automatizados cobrindo todas as ferramentas
  │    ├── audit/
  │    │    └── models.py        # Modelo AuditLog (IP, ferramenta, status, timestamp)
- │    └── pdf_tools/            # App reservado para futuras ferramentas (split, compress)
+ │    └── pdf_tools/
+ │         └── services/        # Lógica de negócio das ferramentas PDF
+ │              ├── merge_service.py
+ │              ├── split_service.py
+ │              ├── compress_service.py
+ │              ├── word_service.py
+ │              ├── image_service.py
+ │              ├── security_service.py
+ │              └── transform_service.py
  ├── requirements/base.txt      # Dependências Python
- └── Dockerfile                 # Imagem de produção (Python 3.12-slim)
+ └── Dockerfile                 # Imagem de produção (Python 3.12-slim + LibreOffice)
 ```
 
-**Banco de dados**: SQLite por padrão (sem configuração necessária).
+## 🌐 Endpoints Disponíveis (`/api/`)
 
-**Fluxo de uma requisição de merge**:
-1. Front-End envia `POST /api/merge/` com os PDFs em `multipart/form-data`
-2. `api/views.py` valida os arquivos, abre cada PDF com `pikepdf` e une as páginas em memória
-3. Salva um registro em `AuditLog` com IP, quantidade de arquivos e status
-4. Retorna o PDF mesclado como download (`Content-Disposition: attachment`)
+| Rota | Método | Descrição |
+| :--- | :---: | :--- |
+| `/api/merge/` | POST | Junta múltiplos PDFs |
+| `/api/split/` | POST | Divide páginas em ZIP ou intervalo |
+| `/api/compress/` | POST | Comprime e otimiza o PDF |
+| `/api/word-to-pdf/` | POST | Converte Word (.docx/.doc) para PDF |
+| `/api/pdf-to-word/` | POST | Converte PDF para Word (.docx) editável |
+| `/api/pdf-to-images/` | POST | Extrai páginas em JPG/PNG |
+| `/api/images-to-pdf/` | POST | Une imagens em um arquivo PDF |
+| `/api/protect/` | POST | Criptografa o PDF com senha (AES-256) |
+| `/api/unlock/` | POST | Remove restrições e senha do PDF |
+| `/api/rotate/` | POST | Rotaciona páginas (90°, 180°, 270°) |
+| `/api/watermark/` | POST | Aplica marca d'água textual |
 
-## 🛠 Tecnologias Usadas
-
-- **Python 3.12 + Django 5** — framework principal e construção das rotas REST
-- **pikepdf** — manipulação e merge de PDFs em memória (sem salvar no disco)
-- **Gunicorn** — servidor WSGI de produção
-- **Whitenoise** — serve arquivos estáticos sem precisar de Nginx separado
-- **django-cors-headers** — permite chamadas cross-origin do Front-End
-- **SQLite** — banco de dados para logs de auditoria (zero configuração)
-
-## 🚀 Como Rodar o Back-End
-
-### Execução local
+## 🧪 Testes Automatizados
 
 ```bash
-# 1. Instale as dependências
-pip install -r requirements/base.txt
-
-# 2. Aplique as migrações
-python manage.py migrate
-
-# 3. Inicie o servidor
-python manage.py runserver
-# API disponível em http://localhost:8000
-```
-
-### Via Docker
-
-```bash
-docker build -t pdf-editor-backend .
-docker run -p 8000:8000 pdf-editor-backend
-```
-
-### Testando a API de merge
-
-```bash
-curl -X POST http://localhost:8000/api/merge/ \
-  -F "files=@arquivo1.pdf" \
-  -F "files=@arquivo2.pdf" \
-  --output merged.pdf
+python manage.py test apps.api
 ```

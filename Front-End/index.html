@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Editor Pro</title>
+    <title>PDF Editor Pro - Ferramentas Online Grátis para PDF</title>
+    <meta name="description" content="Junte, divida, comprima, converta Word para PDF e PDF para Word, rotacione e proteja seus arquivos PDF online gratuitamente.">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./static/img/favicon.svg">
+    <link rel="alternate icon" href="./static/img/favicon.ico">
+    <link rel="apple-touch-icon" href="./static/img/apple-touch-icon.png">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- CSS -->
     <link rel="stylesheet" href="./static/css/base.css">
@@ -16,6 +22,7 @@
     <link rel="stylesheet" href="./static/css/components.css">
     <link rel="stylesheet" href="./static/css/dark-mode.css">
     <link rel="stylesheet" href="./static/css/animations.css">
+    <link rel="stylesheet" href="./static/css/pages/tool.css">
 </head>
 <body data-api-url="/pdf-editor">
     <!-- Navbar -->
@@ -27,10 +34,12 @@
             </a>
             
             <div class="nav-links">
-                <a href="merge.html">Juntar PDF</a>
-                <a href="#">Dividir</a>
-                <a href="#">Comprimir</a>
-                <a href="#">Converter</a>
+                <a href="index.html" class="active">Início</a>
+                <a href="merge.html">Juntar</a>
+                <a href="split.html">Dividir</a>
+                <a href="compress.html">Comprimir</a>
+                <a href="word-to-pdf.html">Word para PDF</a>
+                <a href="pdf-to-word.html">PDF para Word</a>
             </div>
             
             <div class="nav-actions">
@@ -47,19 +56,120 @@
         <section class="hero">
             <div class="hero-content">
                 <h1>Tudo o que você precisa para PDFs em um só lugar</h1>
-                <p>Junte, divida, comprima, converta, rotacione e aplique marca d'água com apenas alguns cliques. 100% Gratuito e fácil!</p>
+                <p>Junte, divida, comprima, converta de/para Word, rotacione e proteja arquivos PDF com apenas alguns cliques. 100% Gratuito e seguro!</p>
             </div>
         </section>
 
         <section class="tools-grid-section">
             <div class="tools-grid">
-                <!-- Merge Tool -->
+                <!-- 1. Juntar PDF -->
                 <a href="merge.html" class="tool-card group">
-                    <div class="tool-icon merge-icon">
+                    <span class="badge-category badge-organize">Organizar</span>
+                    <div class="tool-icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13"></path><path d="M8 12h13"></path><path d="M8 18h13"></path><path d="M3 6h.01"></path><path d="M3 12h.01"></path><path d="M3 18h.01"></path></svg>
                     </div>
                     <h3>Juntar PDF</h3>
-                    <p>Combine PDFs na ordem que quiser com o combinador mais fácil disponível.</p>
+                    <p>Combine múltiplos PDFs na ordem que você desejar de forma simples e rápida.</p>
+                </a>
+
+                <!-- 2. Dividir PDF -->
+                <a href="split.html" class="tool-card group">
+                    <span class="badge-category badge-organize">Organizar</span>
+                    <div class="tool-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+                    </div>
+                    <h3>Dividir PDF</h3>
+                    <p>Extraia uma ou mais páginas ou salve cada página como um arquivo PDF individual.</p>
+                </a>
+
+                <!-- 3. Comprimir PDF -->
+                <a href="compress.html" class="tool-card group">
+                    <span class="badge-category badge-optimize">Otimizar</span>
+                    <div class="tool-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14h6m-6 0v6m0-6l7 7M20 10h-6m6 0V4m0 6l-7-7"></path></svg>
+                    </div>
+                    <h3>Comprimir PDF</h3>
+                    <p>Diminua o tamanho do arquivo PDF mantendo a máxima qualidade visual possível.</p>
+                </a>
+
+                <!-- 4. Word para PDF -->
+                <a href="word-to-pdf.html" class="tool-card group">
+                    <span class="badge-category badge-convert">Converter</span>
+                    <div class="tool-icon" style="background-color: #dbeafe; color: #2563eb;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M9 13l3 3 3-3"></path></svg>
+                    </div>
+                    <h3>Word para PDF</h3>
+                    <p>Converta documentos DOCX e DOC para PDF com total precisão de formatação.</p>
+                </a>
+
+                <!-- 5. PDF para Word -->
+                <a href="pdf-to-word.html" class="tool-card group">
+                    <span class="badge-category badge-convert">Converter</span>
+                    <div class="tool-icon" style="background-color: #dbeafe; color: #2563eb;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M10 12l2 4 2-4"></path></svg>
+                    </div>
+                    <h3>PDF para Word</h3>
+                    <p>Transforme arquivos PDF em documentos Word editáveis com tabelas e estilos.</p>
+                </a>
+
+                <!-- 6. PDF para Imagens -->
+                <a href="pdf-to-img.html" class="tool-card group">
+                    <span class="badge-category badge-convert">Converter</span>
+                    <div class="tool-icon" style="background-color: #dcfce7; color: #10b981;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    </div>
+                    <h3>PDF para Imagens</h3>
+                    <p>Extraia todas as páginas do PDF e salve como imagens JPG ou PNG em alta definição.</p>
+                </a>
+
+                <!-- 7. Imagens para PDF -->
+                <a href="img-to-pdf.html" class="tool-card group">
+                    <span class="badge-category badge-convert">Converter</span>
+                    <div class="tool-icon" style="background-color: #dcfce7; color: #10b981;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    </div>
+                    <h3>Imagens para PDF</h3>
+                    <p>Converta fotos e imagens JPG, PNG ou WEBP em um documento PDF organizado.</p>
+                </a>
+
+                <!-- 8. Proteger PDF -->
+                <a href="protect.html" class="tool-card group">
+                    <span class="badge-category badge-security">Segurança</span>
+                    <div class="tool-icon" style="background-color: #f3e8ff; color: #7e22ce;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                    <h3>Proteger PDF</h3>
+                    <p>Adicione senha e criptografia forte AES-256 para manter suas informações seguras.</p>
+                </a>
+
+                <!-- 9. Desbloquear PDF -->
+                <a href="unlock.html" class="tool-card group">
+                    <span class="badge-category badge-security">Segurança</span>
+                    <div class="tool-icon" style="background-color: #f3e8ff; color: #7e22ce;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
+                    </div>
+                    <h3>Desbloquear PDF</h3>
+                    <p>Remova senhas e restrições de permissão do seu PDF para uso livre.</p>
+                </a>
+
+                <!-- 10. Rotacionar PDF -->
+                <a href="rotate.html" class="tool-card group">
+                    <span class="badge-category badge-organize">Organizar</span>
+                    <div class="tool-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+                    </div>
+                    <h3>Rotacionar PDF</h3>
+                    <p>Gire as páginas do documento em 90°, 180° ou 270° na orientação desejada.</p>
+                </a>
+
+                <!-- 11. Marca d'Água -->
+                <a href="watermark.html" class="tool-card group">
+                    <span class="badge-category badge-security">Segurança</span>
+                    <div class="tool-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                    </div>
+                    <h3>Marca d'Água</h3>
+                    <p>Adicione carimbos textuais como "CONFIDENCIAL" ou marcas d'água personalizadas.</p>
                 </a>
             </div>
         </section>

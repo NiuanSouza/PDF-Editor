@@ -143,6 +143,10 @@
     justify-content: space-between;
 }
 
+.option-group {
+    margin-bottom: 1.5rem;
+}
+
 .option-group h3 {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
@@ -151,7 +155,110 @@
 .option-desc {
     color: var(--text-muted);
     font-size: 0.9rem;
+    margin-bottom: 0.75rem;
 }
+
+/* Form Controls */
+.form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+    color: var(--text-main);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* Radio Cards / Pills */
+.radio-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.radio-card-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-main);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.radio-card-label:hover {
+    border-color: var(--primary);
+}
+
+.radio-card-label input[type="radio"] {
+    accent-color: var(--primary);
+    width: 18px;
+    height: 18px;
+}
+
+.radio-card-label.selected {
+    border-color: var(--primary);
+    background-color: var(--primary-light);
+}
+
+/* Range slider */
+.slider-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.slider-group input[type="range"] {
+    flex: 1;
+    accent-color: var(--primary);
+}
+
+.slider-val {
+    font-weight: 600;
+    min-width: 45px;
+    text-align: right;
+}
+
+/* Badges */
+.badge-category {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+}
+
+.badge-organize { background-color: #e0f2fe; color: #0369a1; }
+.badge-convert { background-color: #fef3c7; color: #b45309; }
+.badge-optimize { background-color: #dcfce7; color: #15803d; }
+.badge-security { background-color: #f3e8ff; color: #7e22ce; }
+
+[data-theme="dark"] .badge-organize { background-color: #082f49; color: #7dd3fc; }
+[data-theme="dark"] .badge-convert { background-color: #451a03; color: #fcd34d; }
+[data-theme="dark"] .badge-optimize { background-color: #052e16; color: #86efac; }
+[data-theme="dark"] .badge-security { background-color: #3b0764; color: #d8b4fe; }
 
 /* Progress Overlay */
 .progress-overlay {

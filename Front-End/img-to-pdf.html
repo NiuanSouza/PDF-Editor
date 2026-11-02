@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagens para PDF - PDF Editor Pro</title>
+    <meta name="description" content="Converta e junte fotos e imagens JPG, PNG ou WEBP em um único documento PDF organizado.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./static/img/favicon.svg">
+    <link rel="alternate icon" href="./static/img/favicon.ico">
+    <link rel="apple-touch-icon" href="./static/img/apple-touch-icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./static/css/base.css">
+    <link rel="stylesheet" href="./static/css/layout.css">
+    <link rel="stylesheet" href="./static/css/components.css">
+    <link rel="stylesheet" href="./static/css/dark-mode.css">
+    <link rel="stylesheet" href="./static/css/animations.css">
+    <link rel="stylesheet" href="./static/css/pages/tool.css">
+</head>
+<body data-api-url="/pdf-editor">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <span>PDF Pro</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Início</a>
+                <a href="merge.html">Juntar</a>
+                <a href="split.html">Dividir</a>
+                <a href="compress.html">Comprimir</a>
+                <a href="word-to-pdf.html">Word para PDF</a>
+                <a href="pdf-to-word.html">PDF para Word</a>
+            </div>
+
+            <div class="nav-actions">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle Dark Mode">
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="tool-workspace">
+            <div class="tool-header">
+                <h1>Imagens para PDF</h1>
+                <p>Junte múltiplas fotos JPG, PNG ou WEBP em um único arquivo PDF. Arraste para reordenar.</p>
+            </div>
+
+            <div class="upload-area" id="dropzone">
+                <div class="upload-content">
+                    <div class="upload-icon-pulse">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    </div>
+                    <button class="btn-primary btn-large" id="selectFilesBtn">Selecionar imagens</button>
+                    <p class="upload-hint">ou arraste e solte fotos/imagens aqui</p>
+                </div>
+                <input type="file" id="fileInput" multiple accept="image/jpeg,image/png,image/webp" class="hidden-input">
+            </div>
+
+            <!-- Active Workspace -->
+            <div class="active-workspace" id="activeWorkspace" style="display: none;">
+                <div class="file-grid" id="fileGrid"></div>
+
+                <div class="workspace-sidebar">
+                    <div class="sidebar-options">
+                        <div class="option-group">
+                            <h3>Opções</h3>
+                            <p class="option-desc">Reordene as imagens arrastando os cards na tela para definir a ordem das páginas no PDF gerado.</p>
+                        </div>
+                    </div>
+
+                    <button id="processBtn" class="btn-primary btn-block">
+                        Converter para PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- Progress Overlay -->
+            <div class="progress-overlay" id="progressOverlay" style="display: none;">
+                <div class="progress-card">
+                    <h3>Gerando PDF...</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <p id="progressText">Enviando imagens...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2026 PDF Pro. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="./static/js/core/main.js"></script>
+    <script type="module">
+        import { imagesToPdf } from './static/js/services/api.js';
+        import { setupToolWorkspace } from './static/js/upload/toolWorkspace.js';
+
+        setupToolWorkspace({
+            accept: 'image/jpeg,image/png,image/webp',
+            multiple: true,
+            minFiles: 1,
+            executeApi: async (files, options, onProgress) => {
+                return await imagesToPdf(files, onProgress);
+            },
+            onSuccessMessage: 'Imagens convertidas em PDF com sucesso!'
+        });
+    </script>
+</body>
+</html>
+

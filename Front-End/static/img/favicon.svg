@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5322D" />
+      <stop offset="100%" stop-color="#B91C1C" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Base Rounded Container -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bgGrad)" />
+
+  <!-- Sheet of Paper -->
+  <path d="M16 12 C16 10.9 16.9 10 18 10 H36 L48 22 V50 C48 51.1 47.1 52 46 52 H18 C16.9 52 16 51.1 16 50 Z" 
+        fill="#FFFFFF" 
+        filter="url(#shadow)" />
+
+  <!-- Folded Corner -->
+  <path d="M36 10 V20 C36 21.1 36.9 22 38 22 H48 Z" fill="#E2E8F0" />
+
+  <!-- Document Lines -->
+  <rect x="22" y="22" width="10" height="2.5" rx="1.25" fill="#CBD5E1" />
+  <rect x="22" y="27" width="20" height="2.5" rx="1.25" fill="#CBD5E1" />
+
+  <!-- PDF Badge -->
+  <rect x="13" y="33" width="38" height="15" rx="4" fill="#E5322D" />
+  <text x="32" y="44.5" 
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" 
+        font-size="10.5" 
+        font-weight="900" 
+        letter-spacing="0.5" 
+        fill="#FFFFFF" 
+        text-anchor="middle">PDF</text>
+</svg>
+
